@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Search</title>
+</head>
+<body>
+    <h1>Search for a Movie</h1>
+    <form action="/search" method="post">
+        <label for="field">Field:</label>
+        <select id="field" name="field">
+            <option value="name">Name</option>
+            <option value="rating">Rating</option>
+            <option value="genre">Genre</option>
+            <option value="year">Year</option>
+            <option value="released">Released</option>
+            <option value="score">Score</option>
+            <option value="votes">Votes</option>
+            <option value="director">Director</option>
+            <option value="writer">Writer</option>
+            <option value="star">Star</option>
+            <option value="country">Country</option>
+            <option value="budget">Budget</option>
+            <option value="gross">Gross</option>
+            <option value="company">Company</option>
+            <option value="runtime">Runtime</option>
+        </select><br><br>
+
+        <label for="value">Value:</label>
+        <input type="text" id="value" name="value"><br><br>
+
+        <input type="submit" value="Search">
+    </form>
+
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
+    {% if results %}
+    <h2>Results:</h2>
+    <ul>
+        {% for result in results %}
+        <li>
+            <ul>
+                {% for key, value in result.items() %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
